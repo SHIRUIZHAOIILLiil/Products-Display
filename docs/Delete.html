@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home-Perfecto Sculpture</title>
+    <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+	<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+	<script src="../src/assets/js/vendors/jquery.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+
+</head>
+
+<style>
+	#submit
+{
+cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    background: #00FFFF;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 0;
+    -moz-box-shadow: 0 15px 30px 0 rgba(255,255,255,.1) inset;
+    -webkit-box-shadow: 0 15px 30px 0 rgba(255,255,255,.1) inset;
+    box-shadow: 0 15px 30px 0 rgba(255,255,255,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+.cyan
+{
+	color: #00FFFF;
+}
+#cyan{
+	color: #00FFFF;
+}
+</style>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <a class="navbar-brand font-weight-bolder mr-3" href="Home.php"><img src="../img/logo.jpg"></a>
+    <button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsDefault">
+    	<ul class="navbar-nav mr-auto align-items-center" >
+    		<form class="bd-search hidden-sm-down" 
+    			action="Search.php" method="get" enctype="multipart/form-data">
+    			<input type="text" name="search" class="form-control bg-graylight border-0 font-weight-bold" id="search-input" placeholder="Search..." autocomplete="off">
+    			<button type="submit" id="submit">submit</button>
+    			<div class="dropdown-menu bd-search-results" id="search-results">
+    			</div>
+    		</form>
+    	</ul>
+    	
+    	<ul class="navbar-nav ml-auto align-items-center">
+    		
+    		 <?php session_start() ;
+    		 	if(isset($_SESSION['username']))    		 	
+    		 	{
+    		 		if($_SESSION['role']=='admin')
+    		 		{
+    		 			print<<<EOT
+    		 	<li class="nav-item">
+    		    <a class="nav-link " href="Upload.html"><img class="rounded-circle mr-2" src="assets/img/av.png" width="30">$_SESSION[username]</a>
+    		   </li>
+    		   <li class="nav-item">
+    		    <a class="nav-link " href="Alter1.php">Alter</a>
+    		   </li>
+EOT;
+    		 		}
+    		 		else
+    		 		{
+    		 			print<<<EOT
+    		 	<li class="nav-item">
+    		    <a class="nav-link " href="#"><img class="rounded-circle mr-2" src="assets/img/av.png" width="30">$_SESSION[username]</a>
+    		   </li>
+EOT;
+    		 		}
+    		 	}
+    		else
+    		{
+    		echo'
+    		<li class="nav-item">
+    		<a class="nav-link active " href="Login.html">Login</a>	
+    		</li>
+    		<li class="nav-item">
+    		<a class="nav-link" href="Login_Admin.html">Login_Admin</a>
+    		</li>
+    		<li class="nav-item">
+    		<a class="nav-link" href="Register.html">Register</a>
+    		</li>
+    		';
+    		}
+    		?>    		
+    	</ul>
+    </div>
+    </nav>    
+    <main role="main">
+        
+    
+    <section class="mt-4 mb-5">
+ 
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="card-columns">
+    			<?php foreach($production as $k => $v):?>
+    			<div class="card card-pin">
+    				<img class="card-img" src="<?php echo $v['P_Img_Path'];?>"alt="Card image">
+    				<div class="overlay">
+    					<h2 class="card-title title"><?php echo $v['PName'];?></h2>
+    					<div class="more">
+    					<a href="Del_good.php?id=<?php echo $v['Pno'];?>">
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Delete it </a>
+
+    					</div>
+    				</div>
+    			</div>
+    			<?php endforeach;?>
+    		</div>
+    	</div>
+    </div>
+    </section>
+        
+    </main>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/theme.js"></script>
+    
+    <footer class="footer pt-5 pb-5 text-center">
+        
+    <div class="container">
+        
+          <div class="socials-media">
+    
+            <ul class="list-unstyled">
+              <li class="d-inline-block ml-1 mr-1"><a href="#" class="text-dark"><i class="fa fa-facebook"></i></a></li>
+              <li class="d-inline-block ml-1 mr-1"><a href="#" class="text-dark"><i class="fa fa-twitter"></i></a></li>
+              <li class="d-inline-block ml-1 mr-1"><a href="#" class="text-dark"><i class="fa fa-instagram"></i></a></li>
+              <li class="d-inline-block ml-1 mr-1"><a href="#" class="text-dark"><i class="fa fa-google-plus"></i></a></li>
+              <li class="d-inline-block ml-1 mr-1"><a href="#" class="text-dark"><i class="fa fa-behance"></i></a></li>
+              <li class="d-inline-block ml-1 mr-1"><a href="#" class="text-dark"><i class="fa fa-dribbble"></i></a></li>
+            </ul>
+    
+          </div>
+
+          <p>©  <span class="credits font-weight-bold">        
+            <a target="_blank" class="text-dark" href="#"><u>Production is only for operation</u> by Perfecto Sculptures.</a>
+          </span>
+          </p>
+    
+    
+        </div>
+        
+    </footer>    
+</body>
+    
+</html>
